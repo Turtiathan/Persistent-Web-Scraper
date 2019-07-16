@@ -10,11 +10,8 @@ class Scraper:
         self.conn = sqlite3.connect("my.db")
 
     def create_database(self):
-        try:
-            self.conn.execute('''CREATE TABLE celebs 
-                                (name text, networth int)''')
-        except:
-            pass
+        self.conn.execute('''CREATE TABLE IF NOT EXISTS celebs 
+                    (name text, networth int)''')
 
     def close_database(self):
         self.conn.close()
@@ -60,4 +57,3 @@ scrape.create_database()
 scrape.scrape_networth(3)
 scrape.get_networth("Elton John")
 scrape.close_database()
-
